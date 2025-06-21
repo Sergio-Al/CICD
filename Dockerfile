@@ -8,7 +8,11 @@ RUN echo '<?xml version="1.0" encoding="UTF-8"?>' > /usr/local/tomcat/conf/tomca
     echo '              version="1.0">' >> /usr/local/tomcat/conf/tomcat-users.xml && \
     echo '  <role rolename="manager-gui"/>' >> /usr/local/tomcat/conf/tomcat-users.xml && \
     echo '  <role rolename="manager-script"/>' >> /usr/local/tomcat/conf/tomcat-users.xml && \
-    echo '  <user username="admin" password="admin123" roles="manager-gui,manager-script"/>' >> /usr/local/tomcat/conf/tomcat-users.xml && \
+    echo '  <role rolename="manager-jmx"/>' >> /usr/local/tomcat/conf/tomcat-users.xml && \
+    echo '  <role rolename="manager-status"/>' >> /usr/local/tomcat/conf/tomcat-users.xml && \
+    echo '  <role rolename="admin-gui"/>' >> /usr/local/tomcat/conf/tomcat-users.xml && \
+    echo '  <user username="admin" password="admin123" roles="manager-gui,manager-script,manager-jmx,manager-status,admin-gui"/>' >> /usr/local/tomcat/conf/tomcat-users.xml && \
+    echo '  <user username="jenkins" password="jenkins_deploy" roles="manager-script,manager-jmx,manager-status"/>' >> /usr/local/tomcat/conf/tomcat-users.xml && \
     echo '</tomcat-users>' >> /usr/local/tomcat/conf/tomcat-users.xml
 
 ADD target/JsfDemoApp-1.0-SNAPSHOT.war /usr/local/tomcat/webapps/

@@ -40,16 +40,20 @@ jobs:
         registry: docker.io
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+        
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v3
       
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
       
-    - name: Build and push
+    - name: Build and push multi-platform
       uses: docker/build-push-action@v6
       with:
         context: .
         file: Dockerfile
         push: true
-        tags: sergioal900/cicddockerimagegithubactions2025par2
+        platforms: linux/amd64,linux/arm64
+        tags: |
+          sergioal900/cicddockerimagegithubactions2025par2:latest
+          sergioal900/cicddockerimagegithubactions2025par2:${{ github.sha }}
